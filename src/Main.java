@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Main{
+public class Main {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
@@ -21,15 +21,15 @@ public class Main{
                     Student s = new Student();
 
                     System.out.print("Enter ID: ");
-                    s.id = sc.nextInt();
+                    s.setId(sc.nextInt());
 
-                    sc.nextLine(); // clear buffer
+                    sc.nextLine();
 
                     System.out.print("Enter Name: ");
-                    s.name = sc.nextLine();
+                    s.setName(sc.nextLine());
 
                     System.out.print("Enter Marks: ");
-                    s.marks = sc.nextDouble();
+                    s.setMarks(sc.nextDouble());
 
                     students.add(s);
 
