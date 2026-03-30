@@ -11,7 +11,9 @@ public class Main {
             System.out.println("\n--- Student Management System ---");
             System.out.println("1. Add Student");
             System.out.println("2. View Students");
-            System.out.println("3. Exit");
+            System.out.println("3. Search Student");
+            System.out.println("4. Delete Student");
+            System.out.println("5. Exit");
             System.out.print("Enter choice: ");
 
             int choice = sc.nextInt();
@@ -47,9 +49,46 @@ public class Main {
                     break;
 
                 case 3:
+                    System.out.print("Enter ID to search: ");
+                    int searchId = sc.nextInt();
+
+                    boolean found = false;
+
+                    for (Student st : students) {
+                        if (st.getId() == searchId) {
+                            st.display();
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    if (!found) {
+                        System.out.println("Student not found.");
+                    }
+                    break;
+
+                case 4:
+                    System.out.print("Enter ID to delete: ");
+                    int deleteId = sc.nextInt();
+
+                    boolean removed = false;
+
+                    for (Student st : students) {
+                        if (st.getId() == deleteId) {
+                            students.remove(st);
+                            System.out.println("Student deleted successfully!");
+                            removed = true;
+                            break;
+                        }
+                    }
+
+                    if (!removed) {
+                        System.out.println("Student not found.");
+                    }
+                    break;
+                case 5:
                     System.out.println("Exiting...");
                     return;
-
                 default:
                     System.out.println("Invalid choice!");
             }
