@@ -18,21 +18,20 @@ public class Main {
 
             switch (choice) {
                 case 1:
-                    Student s = new Student();
-
                     System.out.print("Enter ID: ");
-                    s.setId(sc.nextInt());
+                    int id = sc.nextInt();
 
                     sc.nextLine();
 
                     System.out.print("Enter Name: ");
-                    s.setName(sc.nextLine());
+                    String name = sc.nextLine();
 
                     System.out.print("Enter Marks: ");
-                    s.setMarks(sc.nextDouble());
+                    double marks = sc.nextDouble();
+
+                    Student s = new Student(id, name, marks);
 
                     students.add(s);
-
                     System.out.println("Student added successfully!");
                     break;
 

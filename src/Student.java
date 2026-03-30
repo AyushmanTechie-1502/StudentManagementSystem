@@ -3,6 +3,13 @@ public class Student {
     private String name;
     private double marks;
 
+    // Constructor
+    public Student(int id, String name, double marks) {
+        this.id = id;
+        this.name = name;
+        setMarks(marks);
+    }
+
     // Setter methods
     public void setId(int id) {
         this.id = id;
@@ -13,12 +20,12 @@ public class Student {
     }
 
     public void setMarks(double marks) {
-    if (marks >= 0 && marks <= 100) {
-        this.marks = marks;
-    } else {
-        System.out.println("Invalid marks!");
+        if (marks >= 0 && marks <= 100) {
+            this.marks = marks;
+        } else {
+            System.out.println("Invalid marks!");
+        }
     }
-}
 
     // Getter methods
     public int getId() {
