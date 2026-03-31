@@ -1,126 +1,87 @@
-import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class Main {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        ArrayList<Student> students = new ArrayList<>();
+        StudentService service = new StudentService();
 
         while (true) {
-            System.out.println("1. Add Student");
-            System.out.println("2. View Students");
-            System.out.println("3. Search Student");
-            System.out.println("4. Delete Student");
-            System.out.println("5. Update Student");
-            System.out.println("6. Exit");
-            System.out.print("Enter choice: ");
+            try {
+                System.out.println("\n--- Student Management System ---");
+                System.out.println("1. Add Student");
+                System.out.println("2. View Students");
+                System.out.println("3. Search Student");
+                System.out.println("4. Delete Student");
+                System.out.println("5. Update Student");
+                System.out.println("6. Exit");
+                System.out.print("Enter choice: ");
 
-            int choice = sc.nextInt();
+                int choice = sc.nextInt();
 
-            switch (choice) {
-                case 1:
-                    System.out.print("Enter ID: ");
-                    int id = sc.nextInt();
+                switch (choice) {
 
-                    sc.nextLine();
+                    case 1:
+                        System.out.print("Enter ID: ");
+                        int id = sc.nextInt();
 
-                    System.out.print("Enter Name: ");
-                    String name = sc.nextLine();
+                        sc.nextLine();
 
-                    System.out.print("Enter Marks: ");
-                    double marks = sc.nextDouble();
+                        System.out.print("Enter Name: ");
+                        String name = sc.nextLine();
 
-                    Student s = new Student(id, name, marks);
+                        System.out.print("Enter Marks: ");
+                        double marks = sc.nextDouble();
 
-                    students.add(s);
-                    System.out.println("Student added successfully!");
-                    break;
+                        Student s = new Student(id, name, marks);
+                        service.addStudent(s);
+                        break;
 
-                case 2:
-                    if (students.isEmpty()) {
-                        System.out.println("No students found.");
-                    } else {
-                        for (Student st : students) {
-                            st.display();
-                            System.out.println("---------------");
-                        }
-                    }
-                    break;
+                    case 2:
+                        service.viewStudents();
+                        break;
 
-                case 3:
-                    System.out.print("Enter ID to search: ");
-                    int searchId = sc.nextInt();
+                    case 3:
+                        System.out.print("Enter ID to search: ");
+                        int searchId = sc.nextInt();
+                        service.searchStudent(searchId);
+                        break;
 
-                    boolean found = false;
+                    case 4:
+                        System.out.print("Enter ID to delete: ");
+                        int deleteId = sc.nextInt();
+                        service.deleteStudent(deleteId);
+                        break;
 
-                    for (Student st : students) {
-                        if (st.getId() == searchId) {
-                            st.display();
-                            found = true;
-                            break;
-                        }
-                    }
+                    case 5:
+                        System.out.print("Enter ID to update: ");
+                        int updateId = sc.nextInt();
 
-                    if (!found) {
-                        System.out.println("Student not found.");
-                    }
-                    break;
+                        sc.nextLine();
 
-                case 4:
-                    System.out.print("Enter ID to delete: ");
-                    int deleteId = sc.nextInt();
+                        System.out.print("Enter new name: ");
+                        String newName = sc.nextLine();
 
-                    boolean removed = false;
+                        System.out.print("Enter new marks: ");
+                        double newMarks = sc.nextDouble();
 
-                    for (Student st : students) {
-                        if (st.getId() == deleteId) {
-                            students.remove(st);
-                            System.out.println("Student deleted successfully!");
-                            removed = true;
-                            break;
-                        }
-                    }
+                        service.updateStudent(updateId, newName, newMarks);
+                        break;
 
-                    if (!removed) {
-                        System.out.println("Student not found.");
-                    }
-                    break;
-                case 5:
-                    System.out.print("Enter ID to update: ");
-                    int updateId = sc.nextInt();
+                    case 6:
+                        System.out.println("Exiting...");
+                        return;
 
-                    boolean updated = false;
+                    default:
+                        System.out.println("Invalid choice!");
+                }
 
-                    for (Student st : students) {
-                        if (st.getId() == updateId) {
-
-                            sc.nextLine(); // clear buffer
-
-                            System.out.print("Enter new name: ");
-                            String newName = sc.nextLine();
-
-                            System.out.print("Enter new marks: ");
-                            double newMarks = sc.nextDouble();
-
-                            st.setName(newName);
-                            st.setMarks(newMarks);
-
-                            System.out.println("Student updated successfully!");
-                            updated = true;
-                            break;
-                        }
-                    }
-
-                    if (!updated) {
-                        System.out.println("Student not found.");
-                    }
-                    break;
-                case 6:
-                    System.out.println("Exiting...");
-                    return;
-                default:
-                    System.out.println("Invalid choice!");
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input! Please enter correct data type.");
+                sc.nextLine(); // clear wrong input
+            } catch (Exception e) {
+                System.out.println("Something went wrong: " + e.getMessage());
             }
         }
     }
