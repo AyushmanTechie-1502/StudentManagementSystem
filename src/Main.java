@@ -8,12 +8,12 @@ public class Main {
         ArrayList<Student> students = new ArrayList<>();
 
         while (true) {
-            System.out.println("\n--- Student Management System ---");
             System.out.println("1. Add Student");
             System.out.println("2. View Students");
             System.out.println("3. Search Student");
             System.out.println("4. Delete Student");
-            System.out.println("5. Exit");
+            System.out.println("5. Update Student");
+            System.out.println("6. Exit");
             System.out.print("Enter choice: ");
 
             int choice = sc.nextInt();
@@ -87,6 +87,36 @@ public class Main {
                     }
                     break;
                 case 5:
+                    System.out.print("Enter ID to update: ");
+                    int updateId = sc.nextInt();
+
+                    boolean updated = false;
+
+                    for (Student st : students) {
+                        if (st.getId() == updateId) {
+
+                            sc.nextLine(); // clear buffer
+
+                            System.out.print("Enter new name: ");
+                            String newName = sc.nextLine();
+
+                            System.out.print("Enter new marks: ");
+                            double newMarks = sc.nextDouble();
+
+                            st.setName(newName);
+                            st.setMarks(newMarks);
+
+                            System.out.println("Student updated successfully!");
+                            updated = true;
+                            break;
+                        }
+                    }
+
+                    if (!updated) {
+                        System.out.println("Student not found.");
+                    }
+                    break;
+                case 6:
                     System.out.println("Exiting...");
                     return;
                 default:
