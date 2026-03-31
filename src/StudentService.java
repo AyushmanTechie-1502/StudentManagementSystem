@@ -1,3 +1,5 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class StudentService {
@@ -70,4 +72,21 @@ public class StudentService {
             System.out.println("Student not found.");
         }
     }
+
+    public void saveToFile() {
+        try {
+            FileWriter writer = new FileWriter("students.txt");
+
+            for (Student st : students) {
+                writer.write(st.getId() + "," + st.getName() + "," + st.getMarks() + "\n");
+            }
+
+            writer.close();
+            System.out.println("Data saved to file successfully!");
+
+        } catch (IOException e) {
+            System.out.println("Error saving file: " + e.getMessage());
+        }
+    }
+
 }
